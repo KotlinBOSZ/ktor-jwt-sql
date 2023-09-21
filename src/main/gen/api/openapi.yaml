@@ -1,0 +1,139 @@
+openapi: 3.0.3
+info:
+  description: ktor_jwt_sql API
+  title: ktor_jwt_sql API
+  version: 1.0.0
+servers:
+- url: https://ktor_jwt_sql
+paths:
+  /users:
+    post:
+      description: Create user
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ExposedUser'
+        required: true
+      responses:
+        "201":
+          content:
+            '*/*':
+              schema:
+                format: int32
+                type: integer
+          description: Created
+      x-content-type: '*/*'
+      x-accepts: '*/*'
+  /users/{id}:
+    delete:
+      description: Delete user
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: OK
+      x-accepts: '*/*'
+    get:
+      description: Read user
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ExposedUser'
+          description: OK
+        "404":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: Not Found
+      x-accepts: '*/*'
+    put:
+      description: Update user
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            schema:
+              $ref: '#/components/schemas/ExposedUser'
+        required: true
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: object
+          description: OK
+      x-content-type: '*/*'
+      x-accepts: '*/*'
+  /:
+    get:
+      description: ""
+      responses:
+        "200":
+          content:
+            text/plain:
+              examples:
+                Example#1:
+                  value: Hello World!
+              schema:
+                type: string
+          description: OK
+      x-accepts: text/plain
+  /json/kotlinx-serialization:
+    get:
+      description: ""
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Map_String'
+          description: OK
+      x-accepts: '*/*'
+components:
+  schemas:
+    ExposedUser:
+      example:
+        name: name
+        age: 0
+      properties:
+        name:
+          type: string
+        age:
+          format: int32
+          type: integer
+      type: object
+    Map:
+      properties: {}
+      type: object
+    Map_String:
+      type: string
+
