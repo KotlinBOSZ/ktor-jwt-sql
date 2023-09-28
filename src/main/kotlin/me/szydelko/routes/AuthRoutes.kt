@@ -93,20 +93,20 @@ fun Route.singIn(
 }
 
 fun Route.authenticate(){
-//    authenticate {
-//        get("authenticate") {
-//            call.respond(HttpStatusCode.OK)
-//        }
-//    }
+    authenticate {
+        get("authenticate") {
+            call.respond(HttpStatusCode.OK)
+        }
+    }
 }
 
 fun Route.getSecretInfo(){
-//    authenticate {
-//        get("secret") {
-//            val principal = call.principal<JWTPrincipal>()
-//            val userId = principal?.getClaim("userId",String::class)
-//            call.respond(HttpStatusCode.OK,"Your UserId is $userId")
-//        }
-//    }
+    authenticate {
+        get("secret") {
+            val principal = call.principal<JWTPrincipal>()
+            val userId = principal?.getClaim("userId",String::class)
+            call.respond(HttpStatusCode.OK,"Your UserId is $userId")
+        }
+    }
 }
 
